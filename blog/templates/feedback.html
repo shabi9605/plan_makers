@@ -1,0 +1,22 @@
+
+
+{% extends 'dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div style="padding-left: 2rem;padding-top: 2rem;padding-bottom: 1em;background-color: #c9c1b1;">
+
+    <h2>Feedback Form</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{feedbackform|crispy}}
+        
+        
+        <input type="submit" value="SEND" style="background-color: #3e36c3;color: white;margin-top: 1em;">
+
+    </form>
+</div>
+
+    {% if msg %}{{msg}}{% endif %}
+
+{% endblock %}

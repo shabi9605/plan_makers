@@ -1,0 +1,25 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+
+<h1>Complaints</h1>
+
+{% for i in complaints %}
+
+<div class="card-group" style="margin-bottom: 1em;" >
+    <div class="card" style="background-color: bisque;margin-left: 2em;margin-right: 2em;margin-top: 1em;">
+      
+      <div class="card-body" style="padding: 2em;">
+        <h5 class="card-title">username: {{i.user}}</h5>
+        <p class="card-text">Content: {{i.content}}</p>
+        <p class="card-text">Reason: {{i.reason}}</p>
+        <p class="card-text">Date: {{i.date}}</p>
+
+        
+        
+      </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

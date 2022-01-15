@@ -1,0 +1,24 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+
+<div style=" background-color: beige;padding-top: 1rem;padding-bottom: 1rem;padding-left: 1em;">
+    <h1>Previous Works</h1>
+<table >
+{% for i in previous_work %}
+<tr >
+<div style="border: 2px solid;border-color: rgb(236, 58, 58);margin: 1em;">
+{% if i.demo %}
+<video controls poster="/images/w3html5.gif">
+    <source src="{{i.demo.url}}" type="video/mp4">
+    
+  </video>
+<a href="{{i.demo.url}}"><img src="{{i.demo.url}}" alt="No images" style="height: 300px;width:200px"></a>
+{% endif %}
+</div>
+</tr>
+{% endfor %}
+</table>
+
+
+{% endblock %}

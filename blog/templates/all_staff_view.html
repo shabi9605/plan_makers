@@ -1,0 +1,54 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+
+
+
+<div class="table-responsive table-shadow" style="background-color: bisque;">
+    
+    {% if staffs %}
+    <table class="table">
+          <thead>
+            <tr>
+              <!-- <th scope="col">#</th> -->
+              <th scope="col">Staff Name</th>
+              <th scope="col">Staff Address</th>
+              <th scope="col">Staff Phone</th>
+              <th scope="col">Status</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+              {% for i in staffs %}
+            <tr style="background-color: #d9a3a3;">
+
+              <td>{{ i.user.username}}</td>
+              <td>{{ i.address}}</td>
+              <td>{{ i.phone }}</td>
+              
+              <td style="color:green;font-weight: bold">{% if i.user.profile.is_online %}
+                Online
+            {% else %}
+                Offline
+            {% endif %}</td>
+              
+
+             
+            </tr>
+
+            {% endfor %}
+
+          </tbody>
+
+    </table>
+    {% else %}
+
+    <span>No Leaves can be found...</span>
+    {% endif %}
+
+</div>
+<!-- /TABLE -->
+
+
+
+{% endblock %}

@@ -1,0 +1,124 @@
+
+{% extends 'dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div style="padding-left: 2rem;padding-top: 2rem;">
+
+    <h2>Customer Requirements</h2>
+    
+</div>
+
+{% if user.register.user_type == 'staff' %}
+
+{% for i in list %}
+
+<div class="card-group" >
+    <div class="card" style="background-color: bisque;margin-left: 2em;margin-right: 2em;margin-top: 1em;">
+      
+      <div class="card-body" style="padding:2em">
+        {% if i.user %}
+        <h5 class="card-title" style="color: rgb(237 26 4);font-weight: bold;font-size: 1.8em;">Customer: <span style="color: black;font-weight: bold;font-size: 1.0em;"> {{i.user}}</span></h5>
+        {% endif %}
+        {% if i.description %}
+        <p class="card-text" style="color: rgb(97 55 153);font-weight: bold;font-size: 1.8em;">Description: <span style="color: black;font-weight: bold;font-size: 1.0em;"> {{i.description}}</span></p>
+        {% endif %}
+        {% if i.square_feet %}
+        <p class="card-text" style="color: rgb(97 55 153);font-weight: bold;font-size: 1.8em;">Square Feet: <span style="color: black;font-weight: bold;font-size: 1.0em;"> {{i.square_feet}}</span></p>
+        {% endif %}
+
+        {% if i.message %}
+        <p class="card-text" style="color: rgb(97 55 153);font-weight: bold;font-size: 1.8em;">Price: <span style="color: black;font-weight: bold;font-size: 1.0em;"> {{i.message}} rs</span></p>
+        {% endif %}
+
+        {% if i.status %}
+        <p class="card-text" style="color: rgb(97 55 153);font-weight: bold;font-size: 1.8em;">Work Status:<span style="color: black;font-weight: bold;font-size: 1.0em;">  {{i.status}}</span></p>
+        {% endif %}
+
+        {% if i.paid == True %}
+        <p class="card-text" style="color: green;font-weight: bold;font-size: 1.5em;">Paid</p>
+        {% else %}
+        <p class="card-text" style="color: rgb(255, 7, 7);font-weight: bold;font-size: 1.5em;">Not Paid</p>
+
+        {% endif %}
+
+
+        <a href="{% url 'update_requirement' i.id %}" ><button style="background-color: maroon;color: white;">Update</button></a>
+        
+      </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endif %}
+
+{% if user.register.user_type == 'customer' %}
+
+{% for user_requirement in user_requirement %}
+
+<div class="card-group" >
+  <div class="card" style="background-color: bisque;margin-left: 2em;margin-right: 2em;margin-top: 1em;">
+    
+    <div class="card-body" style="padding:2em">
+      {% if user_requirement.user %}
+      <h6 style="color: rgb(235 16 16);font-weight: bold;font-size: 1.8em;">Username: <span style="color: black;font-weight: bold;font-size: 1.0em;">{{user_requirement.user}}</span></h6> 
+      {% endif %}
+
+      {% if user_requirement.description %}
+      <p class="card-text" style="color: rgb(97 55 153);font-weight: bold;font-size: 1.8em;">Description: <span style="color: black;font-weight: bold;font-size: 1.0em;"> {{user_requirement.description}}</span></p>
+      {% endif %}
+
+      {% if user_requirement.percentage %}
+      
+      <p class="card-text" style="color: rgb(97 55 153);font-weight: bold;font-size: 1.8em;">Work Percentage: <span style="color: black;font-weight: bold;font-size: 1.0em;"> {{user_requirement.percentage}}</span></p>
+      {% endif %}
+
+      
+      <p class="card-text" style="color: rgb(97 55 153);font-weight: bold;font-size: 1.8em;">Allotted Staff: <span style="color: black;font-weight: bold;font-size: 1.0em;"> {{user_requirement.staff.user.username}}</span></p>
+
+
+      {% if user_requirement.status %}
+      
+      <p class="card-text" style="color: rgb(97 55 153);font-weight: bold;font-size: 1.8em;">Work Status: <span style="color: black;font-weight: bold;font-size: 1.0em;"> {{user_requirement.status}}</span></p>
+      {% endif %}
+
+      {% if user_requirement.square_feet %}
+      
+      <p class="card-text" style="color: rgb(97 55 153);font-weight: bold;font-size: 1.8em;">Square Feet: <span style="color: black;font-weight: bold;font-size: 1.0em;"> {{user_requirement.square_feet}}</span></p>
+      {% endif %}
+      
+      {% if user_requirement.demo %}
+      <h6 style="padding-top: 1em;">Work Demo: </h6>
+      <a href="{{user_requirement.demo.url}}"><button style="background-color: #1d9cd9;color: white;">See demo of work</button></a>
+      <p class="card-text" style="color: rgb(97 55 153);font-weight: bold;font-size: 1.8em;">>Work Demo: <a href="{{user_requirement.demo.url}}"><button style="background-color: #1d9cd9;color: white;">See demo of work</button></a></p>
+      {% endif %}
+
+      
+      <p class="card-text" style="color: rgb(97 55 153);font-weight: bold;font-size: 1.8em;">Work Price: <span style="color: black;font-weight: bold;font-size: 1.0em;"> {{user_requirement.message}} rs</span></p>
+      {% if user_requirement.paid == False %}
+      <a href="{% url 'payment' user_requirement.id %}"><button style="background-color: #1d9cd9;color: white;">Make Payment</button></a>
+      {% else %}
+      <h6 style="padding-top: 1em;color: green;font-weight: bold;">Payment Status: Paid</h6>
+      {% endif %}
+
+
+      {% if user_requirement.paid and user_requirement.work %}
+      <h6 style="padding-top: 1em;">Get Work: </h6>
+      <a href="{{user_requirement.work.url}}" class="card-link" download><button style="background-color: #1d9cd9;color: white;">Download</button></a>
+      {% endif %}
+      
+
+
+
+
+      
+      
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}

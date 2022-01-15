@@ -1,0 +1,53 @@
+{% extends 'dashboard.html' %}
+
+{% block content %}
+
+
+
+<div class="table-responsive table-shadow" style="background-color: bisque;">
+    
+    {% if view_leave %}
+    <table class="table">
+          <thead>
+            <tr>
+              <!-- <th scope="col">#</th> -->
+              <th scope="col">Reason</th>
+              <th scope="col">Start Dtae</th>
+              <th scope="col">Day(s)</th>
+              <th scope="col">Status</th>
+              <th scope="col">Submitted Date</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for leave in view_leave %}
+            <tr style="background-color: #d9a3a3;">
+
+              <td>{{ leave.reason}}</td>
+              <td>{{ leave.startdate}}</td>
+              <td>{{ leave.days }}</td>
+              {% if leave.status %}
+              <td style="color:green;font-weight: bold">{{ leave.status }}</td>
+              {% else %}
+              <td style="color:red">{{ leave.status }}</td>
+              {% endif %}
+              <td>{{ leave.date }}</td>
+
+             
+            </tr>
+
+            {% endfor %}
+
+          </tbody>
+
+    </table>
+    {% else %}
+
+    <span>No Leaves can be found...</span>
+    {% endif %}
+
+</div>
+<!-- /TABLE -->
+
+
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div style="padding-left: 2rem;padding-top: 2rem;">
+
+    <h2>Requirement form</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{requirement_form|crispy}}
+        
+        
+        <input type="submit" value="SEND" style="margin-top: 1em;background-color: crimson;color: white;">
+
+    </form>
+</div>
+
+    {% if msg %}{{msg}}{% endif %}
+
+{% endblock %}

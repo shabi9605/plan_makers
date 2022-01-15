@@ -1,0 +1,14 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div style="padding-bottom: 2rem;padding-left: 2rem;padding-top: 2rem;background-color: #efefef;">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    {{update_form|crispy}}
+    {{update_profile_form|crispy}}
+    <input type="submit" value="UPDATE" style="background-color: #3e36c3;color: white;margin-top: 1em;">
+</form>
+</div>
+
+    
+{% endblock %}

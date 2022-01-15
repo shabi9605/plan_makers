@@ -1,0 +1,26 @@
+{% extends 'dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+
+    {% for chat in admin_chat %}
+    <div class="card" style="width: 18rem; margin-top: 1em;margin-left: 2rem;background-color: #d9c2a5;margin-bottom: 1em;">
+        <div class="card-body" style="padding: 2em;">
+          
+          <h6 class="card-subtitle mb-2 ">Created By : {{chat.user.username}}</h6>
+          <h6 class="card-subtitle mb-2 ">To : {{chat.staff}}</h6>
+          <p class="card-text " style="font-size:25px">Content:{{chat.content}}</p>
+          <p class="card-text " style="font-size:15px">date:{{chat.date}}</p>
+
+          
+        </div>
+      </div>
+    {% endfor %}
+    
+    </div>
+
+    {% if msg %}{{msg}}{% endif %}
+
+{% endblock %}
